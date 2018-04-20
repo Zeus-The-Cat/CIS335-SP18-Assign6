@@ -310,7 +310,7 @@ public class Assembler {
         try {
             Assembler asm = new Assembler();
             
-            asm.assemble(new File("copy.asm"), new File("copy.o"));
+            asm.assemble(new File("sample.asm"), new File("sample.o"));
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
