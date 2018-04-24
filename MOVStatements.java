@@ -36,7 +36,7 @@ public class MOVStatements {
            // System.out.println(label);
             label = label.trim();
             if(label.length()>1){
-                label = label + " ";
+                label = label + "\t";
             }
             passed = passed.substring(i);
         }
@@ -69,7 +69,7 @@ public class MOVStatements {
             param = arg1;
             }
         }
-        processedStatement = label + loadOrStore + " " + param;
+        processedStatement = label + loadOrStore + "\t" + param;
 
     }
 //    public static void main(String[] args) {
