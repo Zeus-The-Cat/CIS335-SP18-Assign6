@@ -63,13 +63,6 @@ public class Assembler {
                     
                     statement.setLocation(_locctr);
                     
-                    if (statement.label() != null) {
-                        if (_symbolTable.containsKey(statement.label())) {
-                            throw new DuplicateSymbolException(statement);
-                        } else {
-                            _symbolTable.put(statement.label(), _locctr);
-                        }
-                    }
                     
                     switch (statement.operation()) {
                         case "START":
@@ -132,7 +125,7 @@ public class Assembler {
     //                System.out.println(statement);
                     
                     objOutputStream.writeObject(statement);
-                } catch (DuplicateSymbolException | InvalidOperationCodeException e) {
+                } catch (InvalidOperationCodeException e) {
                     System.out.println(e.getMessage());
                 }
             }
@@ -142,8 +135,10 @@ public class Assembler {
     }
     
     private void processPass2(File input, File output) throws IOException, ClassNotFoundException {
+        
         try (FileInputStream istream = new FileInputStream(input);
              ObjectInputStream objInputStream = new ObjectInputStream(istream);
+             
              FileWriter objectProgram = new FileWriter(output)) {
             
             List<Record> mRecords = new ArrayList<>();
@@ -164,13 +159,8 @@ public class Assembler {
                 } else {
                     String objectCode = assembleInstruction(statement);
 
-                    // If it is format 4 and not immediate value
-                    if (statement.isExtended() && _symbolTable.containsKey(statement.operand1())) {
-                        mRecords.add(new ModificationRecord(statement.location() + 1, 5));
-                    }
 
-//                    Uncomment next line to show the instruction and corresponding object code
-//                    System.out.println(statement + "\t\t" + objectCode);
+                    System.out.println(statement + "\t\t" + objectCode);
                     
                     if (statement.location() - lastRecordAddress >= 0x1000 || textRecord.add(objectCode) == false) {
                         objectProgram.write(textRecord.toObjectProgram() + '\n');
@@ -189,7 +179,6 @@ public class Assembler {
                 objectProgram.write(r.toObjectProgram() + '\n');
             }
             
-            objectProgram.write(new EndRecord(_firstExecAddress).toObjectProgram() + '\n');
         }
     }
     
