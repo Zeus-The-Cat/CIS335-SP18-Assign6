@@ -59,6 +59,10 @@ public class Statement implements Serializable, Comparable {
     }
     
     public static Statement parse(String statement) {
+        if(statement.contains("MOV")){
+            MOVStatements movStatement = new MOVStatements(statement);
+            statement = movStatement.processedStatement;
+        }
         String[] tokens = statement.trim().split("\t");
         
         if (tokens[0].compareTo(".") == 0) {
