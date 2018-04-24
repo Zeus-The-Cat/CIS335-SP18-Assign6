@@ -117,7 +117,7 @@ public class Assembler {
                                         break;
                                 }
                             } else {
-                                throw new InvalidOperationCodeException(statement);
+                                throw new InvalidOpCodeException(statement);
                             }
                     }
                     
@@ -125,7 +125,7 @@ public class Assembler {
     //                System.out.println(statement);
                     
                     objOutputStream.writeObject(statement);
-                } catch (InvalidOperationCodeException e) {
+                } catch (InvalidOpCodeException e) {
                     System.out.println(e.getMessage());
                 }
             }
