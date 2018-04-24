@@ -37,8 +37,18 @@ private static final Map<String, Operation> OperationTable;
        OperationTable.put("WD",    new Operation("3/4", "DC"));
        OperationTable.put("STCH",  new Operation("3/4", "54"));
        OperationTable.put("CLEAR", new Operation("2",   "B4"));
-       OperationTable.put("MOV",   new Operation("3/4", "00"));
-       
+       //OperationTable.put("MOV",   new Operation("3/4", "00"));
+       OperationTable.put("LDA", new Operation("3/4",   "00"));
+       OperationTable.put("LDB", new Operation("3/4",   "68"));
+       OperationTable.put("LDL", new Operation("3/4",   "08"));
+       OperationTable.put("LDS", new Operation("3/4",   "6C"));
+       OperationTable.put("LDT", new Operation("3/4",   "74"));
+       OperationTable.put("STA", new Operation("3/4",   "0C"));
+       OperationTable.put("STB", new Operation("3/4",   "78"));
+        OperationTable.put("STL", new Operation("3/4",   "14"));
+        OperationTable.put("STS", new Operation("3/4",   "7C"));
+        OperationTable.put("STT", new Operation("3/4",   "84"));
+        OperationTable.put("STX", new Operation("3/4",   "10"));
        }
        
     public static Map<String, Operation> getOperationTable() {
